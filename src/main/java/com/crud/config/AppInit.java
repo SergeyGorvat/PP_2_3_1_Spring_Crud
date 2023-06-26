@@ -43,14 +43,9 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     }
 
     private void registerCharacterEncodingFilter(ServletContext sc) {
-        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
-
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
-        encodingFilter.setEncoding("UTF-8");
-        encodingFilter.setForceEncoding(true);
-
-
-        FilterRegistration.Dynamic characterEncoding = sc.addFilter("characterEncoding", encodingFilter);
-        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        FilterRegistration.Dynamic characterEncoding = sc.addFilter("characterEncoding", new CharacterEncodingFilter());
+        characterEncoding.setInitParameter("encoding", "UTF-8");
+        characterEncoding.setInitParameter("forceEncoding", "true");
+        characterEncoding.addMappingForUrlPatterns(null, false, "/*");
     }
 }
