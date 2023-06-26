@@ -37,12 +37,12 @@ public class PersonServiceImpl implements PersonService {
     @Override
     @Transactional(readOnly = true)
     public Person getPersonById(int id) {
-        return getPersonById(id);
+        return personDao.getPersonById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Person> getAllPeople() {
-        return getAllPeople();
+        return personDao.getAllPeople();
     }
 }
