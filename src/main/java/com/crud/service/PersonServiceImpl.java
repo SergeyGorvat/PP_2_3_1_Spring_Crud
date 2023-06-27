@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class PersonServiceImpl implements PersonService {
 
     private final PersonDao personDao;
@@ -35,13 +36,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Person getPersonById(int id) {
         return personDao.getPersonById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Person> getAllPeople() {
         return personDao.getAllPeople();
     }
