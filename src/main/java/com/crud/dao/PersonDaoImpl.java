@@ -1,16 +1,17 @@
 package com.crud.dao;
 
 import com.crud.model.Person;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Service
+@Component
 public class PersonDaoImpl implements PersonDao {
 
     @PersistenceContext
-    private  EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
     public void addPerson(Person person) {
@@ -23,13 +24,12 @@ public class PersonDaoImpl implements PersonDao {
         person1.setName(person1.getName());
         person1.setSurname(person1.getSurname());
         person1.setAge(person1.getAge());
-        entityManager.merge(person1);
+        entityManager.merge(person);
     }
 
     @Override
     public void removePerson(int id) {
-        Person person = entityManager.find(Person.class, id);
-        entityManager.remove(person);
+        entityManager.remove(getPersonById(id));
     }
 
     @Override
